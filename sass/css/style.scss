@@ -1,0 +1,71 @@
+@use "pico" with (
+  $enable-semantic-container: true,
+  $enable-classes: true,
+  $theme-color: "grey",
+  $modules: (
+    "content/code": false,
+    "forms/input-color": false,
+    "forms/input-date": false,
+    "forms/input-file": false,
+    "forms/input-range": false,
+    "forms/input-search": true,
+    "components/accordion": false,
+    "components/card": false,
+    "components/dropdown": false,
+    "components/loading": false,
+    "components/modal": false,
+    "components/nav": true,
+    "components/progress": false,
+    "components/tooltip": false,
+    "utilities/accessibility": false,
+    "utilities/reduce-motion": true
+  )
+);
+@use "colors" as *;
+@use "colors/utilities" with (
+  $palette: (
+    "color-families": (
+      sand,
+      slate
+    ),
+  ),
+  $utilities: (
+    "background-colors": false,
+  )
+);
+@import "_common",
+        "_vars",
+        "_icons",
+        "_page";
+
+header {
+    height: 5em;
+    nav {
+        text-align: right;
+        justify-content: flex-end;
+        text-transform: uppercase;
+    }
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+}
+
+main {
+    width: 65% !important;
+}
+
+.index-spacer {
+    height: 10rem !important;
+}
+
+html {
+    background-color: var(--pico-background-color);
+}
+
+#index-image {
+    text-align: center;
+}
+

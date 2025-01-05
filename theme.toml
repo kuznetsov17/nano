@@ -1,0 +1,14 @@
+name = "New Start"
+description = "Lightweight Zola theme"
+license = "MIT"
+homepage = "https://github.com/kuznetsov17/new-start"
+# The minimum version of Zola required
+min_version = "0.19.2"
+# An optional live demo URL
+demo = "https://kuznetsov17.github.io/new-start/"
+
+[author]
+name = "Vitaliy Kuznetsov"
+homepage = "https://viku.me"
+
+

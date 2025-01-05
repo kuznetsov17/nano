@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row" id="section-content">
+  <div class="col-8">
+    <h1 class="center">{{ section.title }}</h1>
+    <ul>
+      {% for post in paginator.pages %}
+      <li>
+        <hgroup>
+          <h5>
+            <a href="{{ post.permalink | safe }}">
+              {{ post.title }}</a>
+            </h5>
+          {%- if post.description -%}
+            <p class="invis">{{ post.description }}</p>
+          {%- endif -%}
+          <small class="invis">{{ post.date | date(format="%e %b %Y") }} –– {{ post.reading_time }} min read</small>
+        <span class="invis"></span>
+        </hgroup>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="pagination center">
+      {%- if paginator.previous  or paginator.next -%}    
+      {%- set pag_start = 1 -%}
+      {%- set pag_end = paginator.number_pagers -%}
+      {%- if paginator.previous -%}<a href = "{{ paginator.previous }}">&larr;</a>{%- endif -%}
+      {%- for i in range(start=pag_start, end=pag_end+1) -%}
+        <a class="{% if paginator.current_index == i %} current {% endif %}" href="{{ paginator.base_url | safe }}{{ i ~ '/' }}">{{i}}</a>
+      {%- endfor -%}
+      {%- if paginator.next -%}<a href = {{paginator.next}}>&rarr;</a>{%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+  <div id="right" class="col-2">
+    {% if section.ancestors %}
+    <h4>Tags:</h4>
+    {% set tags = get_taxonomy(kind="tags") %}
+    <ul>
+    {% for tag in tags.items %}
+      <li><a href="{{ tag.permalink | safe }}">{{ tag.name }}</a> ({{ tag.pages | length }})</li>
+    {% endfor %} 
+    </ul>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+

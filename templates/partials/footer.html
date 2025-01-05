@@ -1,0 +1,13 @@
+<footer>
+    <ul class="center">
+        <li>{{ config.extra.copyright_string | replace (from="%YEAR%", to=YEAR) | markdown | safe }}
+        {% if config.extra.footer.icons.github %}
+        <li><a href="{{config.extra.footer.icons.github}}" class="icon footer icon-gh"></a>
+        {% endif %}
+        {% if config.extra.footer.icons.linkedin %}
+        <li><a href="{{config.extra.footer.icons.linkedin}}" class="icon footer icon-linkedin"></a>
+        {% endif %}
+    </ul>
+</footer>
+
+

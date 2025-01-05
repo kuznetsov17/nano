@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class = "index-spacer"></section>
+<section>
+  <div class="grid">
+    <div>
+      <h1> About</h1>
+      {% if section.content %} <p>{{ section.content | safe }}</p>
+      {% elif page.content %}
+      <p>{{ page.content }}</p>
+      {% endif %}
+    </div>
+    <div>
+      <div id = "index-image">
+        <img src="{{config.base_url}}{{ config.extra.avatar_src }}" alt="avatar" class="avatar">
+      </div>
+    </div>
+  </div> 
+</section>
+{% endblock %}
+
