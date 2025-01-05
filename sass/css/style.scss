@@ -33,10 +33,7 @@
     "background-colors": false,
   )
 );
-@import "_common",
-        "_vars",
-        "_icons",
-        "_page";
+@import "zola-theme";
 
 header {
     height: 5em;

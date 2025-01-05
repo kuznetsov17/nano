@@ -1,11 +1,37 @@
 {% set raw = load_data(literal = body, format='toml') %}
 {% set cards = raw.cards %}
-<div class="cards-wrapper center">
-    {% for card in cards %}
-    <div class="panel">
-        <div class="skillcard-icon skillcard-icon-{{card.icon}}"></div>
-        <div class="skillcard-title"><strong>{{ card.title | safe }}</strong></div>
-        <div class="skillcard-details">{{ card.details | markdown | safe }}</div>
-    </div>
+
+{% set_global step = 0 %}
+
+<div class="grid" id="skillcards">
+    <div>
+    {% for item in cards |slice(start=0,end=2)%}   
+        <article class="panel">
+            <div class="skillcard-icon skillcard-icon-{{item.icon}}"></div>
+            <header><h6 class="center">{{item.title}}</h6 class="center"></header>
+            <body>{{item.details | markdown | safe}}</body>
+        </article>
     {% endfor %}
+    </div>
+    <div>
+    {% for item in cards |slice(start=2,end=4)%}   
+        <article class="panel">
+            <div class="skillcard-icon skillcard-icon-{{item.icon}}"></div>
+            <header><h6 class="center">{{item.title}}</h6 class="center"></header>
+            <body>{{item.details | markdown | safe}}</body>
+        </article>
+    {% endfor %}
+    </div>
+    <div>
+    {% for item in cards |slice(start=4,end=6)%}   
+        <article class="panel">
+            <div class="skillcard-icon skillcard-icon-{{item.icon}}"></div>
+            <header><h6 class="center">{{item.title}}</h6 class="center"></header>
+            <body>{{item.details | markdown | safe}}</body>
+        </article>
+    {% endfor %}
+    </div>
 </div>
+
+
+
