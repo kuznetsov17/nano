@@ -67,6 +67,7 @@ function setStartTheme(){
         }
     }
     document.documentElement.setAttribute('data-theme', targetColorTheme);
+    document.getElementById("colorSwitch").addEventListener("click", switchTheme);
     
     switchToggle(targetColorTheme)
     localStorage.setItem('color-theme',targetColorTheme);
