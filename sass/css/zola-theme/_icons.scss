@@ -63,9 +63,9 @@
     mask: url('../icons/light.svg');
     cursor: pointer;
   }
-  .closeBtn {
+  .close-search {
     margin: .5em;
-    mask: url('../icons/close.svg');
+    mask: url('../icons/square-x.svg');
     cursor: pointer;
     &.icon {
       height: 1.5em;

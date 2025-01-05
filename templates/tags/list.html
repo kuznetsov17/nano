@@ -1,15 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="row">
-    <div class="col-12" id="content">
-      {% if terms %}
-      <ul>
-        {% for term in terms %}
-          <li><a class = "taglink" href="{{ term.permalink | safe }}">{{ term.name }}</a> ({{ term.pages | length }});</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-    </div>
-  </div>
+{% if terms %}
+  <ul>
+  {% for term in terms %}
+    <li><a class = "taglink" href="{{ term.permalink | safe }}">{{ term.name }}</a> ({{ term.pages | length }});
+  {% endfor %}
+  </ul>
+{% endif %}
 {% endblock %} 
  

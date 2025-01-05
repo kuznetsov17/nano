@@ -17,7 +17,7 @@ function makeTeaser(body, terms) {
   var TERM_WEIGHT = 40;
   var NORMAL_WORD_WEIGHT = 2;
   var FIRST_WORD_WEIGHT = 8;
-  var TEASER_MAX_WORDS = 20;
+  var TEASER_MAX_WORDS = 10;
 
   var stemmedTerms = terms.map(function (w) {
     return elasticlunr.stemmer(w.toLowerCase());
@@ -91,12 +91,11 @@ function makeTeaser(body, terms) {
   for (var i = maxSumIndex; i < maxSumIndex + windowSize; i++) {
     var word = weighted[i];
     if (startIndex < word[2]) {
-      // missing text from index to start of `word`
       teaser.push(body.substring(startIndex, word[2]));
       startIndex = word[2];
     }
 
-    // add <em/> around search terms
+    
     if (word[1] === TERM_WEIGHT) {
       teaser.push("<b>");
     }
@@ -112,16 +111,21 @@ function makeTeaser(body, terms) {
 }
 
 function formatSearchResultItem(item, terms) {
-  return '<div class="search-results__item">'
-  + `<h4><a href="${item.ref}">${item.doc.title}</a></h4>`
-  + `<div class="teaser">${makeTeaser(item.doc.body, terms)}</div>`
-  + '</div>';
+  doc = `
+  <hgroup>
+    <h6>
+      <a href="${item.ref}">${item.doc.title}</a>
+    </h6>
+      <p>${makeTeaser(item.doc.body, terms)}</p>
+  </hgroup>
+  `;
+  
+  return doc
 }
 
 function initSearch() {
   var $searchInput = document.getElementById("searchInput");
-  var $searchResults = document.getElementById('sResults');
-  var $searchResultsItems = document.getElementById('sResultsUL')
+  var searchResults = document.getElementById('sResults');
   var MAX_ITEMS = 5;
 
   var options = {
@@ -145,58 +149,58 @@ function initSearch() {
       );
     }
     let res = await index;
+    document.getElementById("closeSearch").addEventListener("click", closeSearchResults);
     return res;
-    
   }
 
   $searchInput.addEventListener("keyup", debounce(async function() {
-    if ($searchInput.value != '') {
-      $searchInput.classList.add("textIn")
-    } else {
-      $searchInput.classList.remove("textIn")
-    }
     var term = $searchInput.value.trim();
     if (term === currentTerm) {
       return;
     }
-    $searchResults.style.display = term === "" ? "none" : "block";
-    $searchResultsItems.innerHTML = "";
-    $searchResults.style.top = `${document.documentElement.scrollTop}px`;
-    $searchResultsItems.style.display="block";
-    $searchResultsItems.style.transition="opacity 3s";
+    searchResults.style.display = term === "" ? "none" : "block";
+    searchResults.style.top = `${document.documentElement.scrollTop}px`;
+    searchResults.style.display="block";
+    searchResults.style.transition="opacity 3s";
+    window.addEventListener('click', function(e){   
+      if (! searchResults.contains(e.target)){
+        closeSearchResults();
+      } 
+    });
     
     currentTerm = term;
     if (term === "") {
-      return;
+      closeSearchResults()
+      // return;
     }
 
     var results = (await initIndex()).search(term, options);
     if (results.length === 0) {
-      $searchResults.style.display = "none";
+      searchResults.style.display = "none";
       return;
     }
-    var item = document.createElement("li");
-    clSearch = `<span class="closeBtn icon icon-close" onclick="closeSearchResults();"></span>`
-    item.innerHTML = clSearch;
-    $searchResultsItems.appendChild(item);
-
+    var searchResultsPan = document.createElement("div");
+    searchResultsPan.id = "resultsPan"
+    searchResults.appendChild(searchResultsPan);
     for (var i = 0; i < Math.min(results.length, MAX_ITEMS); i++) {
-      var item = document.createElement("li");
+      var item = document.createElement("div");
       item.innerHTML = formatSearchResultItem(results[i], term.split(" "));
-      $searchResultsItems.appendChild(item);
+      searchResultsPan.appendChild(item);
     }
   }, 150));
 
   window.addEventListener('click', function(e) {
-    if ($searchResults.style.display == "block" && !$searchResults.contains(e.target)) {
-      $searchResults.style.display = "block";
+    if (searchResults.style.display == "block" && !searchResults.contains(e.target)) {
+      searchResults.style.display = "block";
     }
   });
+  
 }
 
+
 function closeSearchResults() {
+  document.getElementById("resultsPan").remove()
   document.getElementById("sResults").style.display="none";
   document.getElementById("searchInput").value="";
-  document.getElementById("searchInput").classList.remove("textIn");
-  initSearch;
+  initSearch();
 }

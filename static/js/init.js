@@ -4,4 +4,5 @@ document.addEventListener("DOMContentLoaded", function(event){
       initSearch();
     }
     setStartTheme();
+    enableCopy();
   });

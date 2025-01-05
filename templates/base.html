@@ -1,6 +1,6 @@
 {% set cdn_version = now() | date(format="%d%m%Y%H%M%S") %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="modal-is-open modal-is-closing">
 <head
   data-base-url="{{config.base_url | safe }}"
   data-giscus-repo="{{config.extra.giscus.data_repo | safe}}"
