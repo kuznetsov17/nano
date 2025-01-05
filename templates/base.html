@@ -32,10 +32,12 @@
 {% endif %}
   <meta name="author" content="{{config.extra.author}}">
   {% if page.extra.keywords is defined %}<meta name="keywords" content="{{ page.extra.keywords }}">{% endif %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" href="{{config.base_url | safe }}css/normalize.css?v={{ cdn_version }}">
   <link type="text/css" rel="stylesheet" href="{{config.base_url | safe }}css/style.css?v={{ cdn_version }}">
+  <link rel="stylesheet" href="{{config.base_url | safe }}/css/inner-moon.min.css?v={{ cdn_version }}">
   <link rel="icon" type="image/png" href="{{config.base_url | safe }}images/favicon.webp">
   <link rel="mask-icon" type="image/png" href="{{config.base_url | safe }}images/favicon.webp">
+  
   {% if config.extra.stats and config.mode != 'serve' %}
   <script async src="{{config.extra.stats.script_src}}" data-website-id="{{config.extra.stats.site_id}}" nonce="{{config.extra.nonce}}"></script>
   {% endif %}
@@ -49,7 +51,6 @@
   {%- endif -%}
   <script src = "{{config.base_url | safe }}js/colortheme.js?v={{ cdn_version }}" nonce="{{config.extra.nonce}}"></script>
   <script src = "{{config.base_url | safe }}js/init.js?v={{ cdn_version }}" nonce="{{config.extra.nonce}}"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-toggles@4.10.1/css/inner-moon.min.css">
 </head>
 <body>
   {% include "partials/header.html" %}
