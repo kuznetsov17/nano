@@ -8,8 +8,8 @@
     {% for item in cards |slice(start=0,end=2)%}   
         <article class="panel">
             <div class="skillcard-icon skillcard-icon-{{item.icon}}"></div>
-            <header><h6 class="center">{{item.title}}</h6 class="center"></header>
-            <body>{{item.details | markdown | safe}}</body>
+            <header><h6 class="center">{{item.title}}</h6></header>
+            {{item.details | markdown | safe}}
         </article>
     {% endfor %}
     </div>
@@ -17,8 +17,8 @@
     {% for item in cards |slice(start=2,end=4)%}   
         <article class="panel">
             <div class="skillcard-icon skillcard-icon-{{item.icon}}"></div>
-            <header><h6 class="center">{{item.title}}</h6 class="center"></header>
-            <body>{{item.details | markdown | safe}}</body>
+            <header><h6 class="center">{{item.title}}</h6></header>
+            {{item.details | markdown | safe}}
         </article>
     {% endfor %}
     </div>
@@ -26,8 +26,8 @@
     {% for item in cards |slice(start=4,end=6)%}   
         <article class="panel">
             <div class="skillcard-icon skillcard-icon-{{item.icon}}"></div>
-            <header><h6 class="center">{{item.title}}</h6 class="center"></header>
-            <body>{{item.details | markdown | safe}}</body>
+            <header><h6 class="center">{{item.title}}</h6></header>
+            {{item.details | markdown | safe}}
         </article>
     {% endfor %}
     </div>

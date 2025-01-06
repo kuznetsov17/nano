@@ -14,8 +14,7 @@
           {%- if post.description -%}
             <p class="invis">{{ post.description }}</p>
           {%- endif -%}
-          <small class="invis">{{ post.date | date(format="%e %b %Y") }} –– {{ post.reading_time }} min read</small>
-        <span class="invis"></span>
+          <p class="small invis">{{ post.date | date(format="%e %b %Y") }} &#x25F4; {{ post.reading_time }} min read</p>
         </hgroup>
       </li>
       {% endfor %}

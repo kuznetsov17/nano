@@ -1,8 +1,8 @@
 <header>
     <div class ="container">
         <nav>
-            {%- if config.build_search_index -%}
             <ul>
+                {%- if config.build_search_index -%}
                 <li><input
                         id="searchInput"  
                         type="search"
@@ -13,16 +13,19 @@
                 </li>
             {%- endif -%}
             {% for menuitem in config.extra.top_menu %}
-                <li><a href="{% if menuitem == config.extra.index_page %}{{config.base_url | safe }}{% else %}{{config.base_url | safe }}{{ menuitem }}{% endif %}" class="{% if menuitem in current_url and menuitem != '/' %} contrast{% elif menuitem == config.extra.index_page and current_url == config.base_url %} contrast{% endif %}">{{ menuitem }}</a></li>
+                <li><a 
+                    href="{% if menuitem == config.extra.index_page %}{{config.base_url | safe }}{% else %}{{config.base_url | safe }}{{ menuitem }}{% endif %}"
+                    {% if menuitem in current_url and menuitem != '/' %}class="contrast"
+                    {% elif menuitem == config.extra.index_page and current_url == config.base_url %}class="contrast"{% endif %}>{{ menuitem }}</a></li>
             {% endfor %}
                 <li>
                     <div class="theme-toggle" title="Toggle theme" id="colorSwitch">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           aria-hidden="true"
-                          width="1em"
-                          height="1em"
-                          fill="currentColor"
+                          width="22"
+                          height="22"
+                          
                           class="theme-toggle__inner-moon"
                           viewBox="0 0 32 32"
                         >

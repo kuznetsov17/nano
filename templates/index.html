@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<section class = "index-spacer"></section>
+<div class = "index-spacer"></div>
 <section>
   <div class="grid">
     <div>
       <h1> About</h1>
-      {% if section.content %} <p>{{ section.content | safe }}</p>
+      {% if section.content %}{{ section.content | safe }}
       {% elif page.content %}
-      <p>{{ page.content }}</p>
+      {{ page.content | safe}}
       {% endif %}
     </div>
     <div>

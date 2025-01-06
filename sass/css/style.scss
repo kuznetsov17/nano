@@ -1,7 +1,7 @@
 @use "pico" with (
   $enable-semantic-container: true,
   $enable-classes: true,
-  $theme-color: "grey",
+  $theme-color: "slate",
   $modules: (
     "content/code": false,
     "forms/input-color": false,
@@ -21,18 +21,7 @@
     "utilities/reduce-motion": true
   )
 );
-@use "colors" as *;
-@use "colors/utilities" with (
-  $palette: (
-    "color-families": (
-      sand,
-      slate
-    ),
-  ),
-  $utilities: (
-    "background-colors": false,
-  )
-);
+// @use "colors" as *;
 @import "zola-theme";
 
 header {
